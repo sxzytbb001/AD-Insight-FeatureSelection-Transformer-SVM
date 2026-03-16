@@ -1,5 +1,7 @@
 # AD Diagnosis Pipeline
 
+Language: **English** | [简体中文](README_CN.md)
+
 Research pipeline for Alzheimer's disease diagnosis from GEO gene expression data.
 
 This project provides a reproducible workflow for:
