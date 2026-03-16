@@ -1,6 +1,10 @@
-# 阿尔茨海默症诊断流程项目
+# AD-Insight：基于集成特征选择与 Transformer-SVM 对比的阿尔茨海默症诊断研究
 
 语言： [English](README.md) | **简体中文**
+
+About：基于集成特征选择与 Transformer 对比 SVM 的阿尔茨海默症诊断研究 / Alzheimer's diagnosis study based on integrated feature selection and Transformer-vs-SVM comparison.
+
+英文简称：**AD-Insight**
 
 这是一个基于 GEO 基因表达数据的阿尔茨海默症诊断研究流程项目，覆盖从训练集预处理、候选基因筛选、Transformer 建模、SVM 对照训练到外部数据集验证的完整链路。
 

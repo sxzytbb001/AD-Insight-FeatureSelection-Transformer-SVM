@@ -1,8 +1,12 @@
-# AD Diagnosis Pipeline
+# AD-Insight: Alzheimer's Diagnosis with Integrated Feature Selection and Transformer-SVM Comparison
 
 Language: **English** | [简体中文](README_CN.md)
 
-Research pipeline for Alzheimer's disease diagnosis from GEO gene expression data.
+About: 基于集成特征选择与 Transformer 对比 SVM 的阿尔茨海默症诊断研究 / Alzheimer's diagnosis study based on integrated feature selection and Transformer-vs-SVM comparison.
+
+Short name: **AD-Insight**
+
+Research framework for Alzheimer's disease diagnosis from GEO gene expression data.
 
 This project provides a reproducible workflow for:
 
