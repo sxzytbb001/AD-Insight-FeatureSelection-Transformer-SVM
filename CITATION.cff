@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: "If you use this pipeline, cite this repository and comply with the LICENSE, NOTICE, and Publication and Competition Policy."
-title: "Gene Expression Classification Pipeline for Alzheimer's Disease Case Studies"
+title: "AD-Insight: Feature Selection and Transformer-vs-SVM Pipeline for Alzheimer's Disease Gene-Expression Diagnosis"
 version: "0.1.0"
 date-released: "2026-06-07"
 authors:

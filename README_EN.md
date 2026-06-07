@@ -1,10 +1,9 @@
-﻿# Gene Expression Classification Pipeline
+﻿# AD-Insight: Alzheimer's Gene-Expression Diagnosis Study
 
-A reproducible Python pipeline for binary classification on gene-expression
-matrices. The case study in this repository focuses on Alzheimer's disease
-case/control cohorts, but the code is dataset-agnostic and can be used with any
-binary transcriptomic dataset that provides an expression matrix and sample
-labels.
+AD-Insight is a reproducible machine-learning pipeline for Alzheimer's disease
+diagnosis research from gene-expression matrices. It combines ensemble feature
+selection, Transformer modeling, and SVM baselines, while remaining adaptable to
+other binary transcriptomic datasets with expression matrices and sample labels.
 
 [简体中文](README.md)
 
