@@ -1,8 +1,8 @@
 cff-version: 1.2.0
-message: "If you use this pipeline in academic work, please cite the repository and the source GEO datasets."
+message: "If you use this pipeline, cite this repository and comply with the LICENSE, NOTICE, and Publication and Competition Policy."
 title: "Gene Expression Classification Pipeline for Alzheimer's Disease Case Studies"
 version: "0.1.0"
 date-released: "2026-06-07"
 authors:
   - name: "AD Diagnosis Contributors"
-license: "MIT"
+license: "PolyForm-Noncommercial-1.0.0"

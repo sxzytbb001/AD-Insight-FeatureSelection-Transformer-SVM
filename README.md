@@ -4,6 +4,14 @@
 
 [English](README_EN.md)
 
+## 授权与使用限制
+
+本项目为公开源码的研究学习项目，按照 [PolyForm Noncommercial License 1.0.0](LICENSE) 提供，仅供学习、复现和非商业评估使用。
+
+未经作者或维护者书面许可，不得将本项目代码、模型产物、候选基因列表、图表、表格、实验输出或直接派生结论用于论文发表、学位论文、预印本、竞赛提交、奖项申报、专利、商业产品、公开 benchmark 或其他公开研究成果，并不得将其声称为独立原创成果。
+
+使用本项目时必须保留作者署名、版权声明、[NOTICE](NOTICE)、[LICENSE](LICENSE) 和 [CITATION.cff](CITATION.cff)。如需基于本项目开展论文、竞赛、商业应用或扩展研究，请先联系作者或维护者沟通合作授权。详细规则见 [Publication and Competition Policy](PUBLICATION_AND_COMPETITION_POLICY.md)。
+
 ## 核心功能
 
 - 自动识别表达矩阵方向：基因为行或样本为行均可。
@@ -235,4 +243,4 @@ GitHub Actions 配置位于 [.github/workflows/tests.yml](.github/workflows/test
 
 ## 许可证
 
-本项目使用 [MIT License](LICENSE)。
+本项目按照 [PolyForm Noncommercial License 1.0.0](LICENSE) 公开源码，并受 [NOTICE](NOTICE) 与 [Publication and Competition Policy](PUBLICATION_AND_COMPETITION_POLICY.md) 约束。论文、竞赛、获奖、商业使用或直接复用研究成果前需获得作者或维护者书面许可。

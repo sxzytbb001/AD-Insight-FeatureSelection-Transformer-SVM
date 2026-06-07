@@ -8,6 +8,14 @@ labels.
 
 [简体中文](README.md)
 
+## License And Use Restrictions
+
+This repository is a source-available research and learning project made available under the [PolyForm Noncommercial License 1.0.0](LICENSE) for educational reproduction and noncommercial evaluation only.
+
+Without prior written permission from the author or maintainer, you may not use this repository's code, model artifacts, candidate gene lists, figures, tables, experiment outputs, or directly derived conclusions in academic publications, theses, preprints, competition submissions, award applications, patents, commercial products, public benchmarks, or other public research claims, and you may not present them as independent original work.
+
+Any use of this repository must preserve attribution, copyright notices, [NOTICE](NOTICE), [LICENSE](LICENSE), and [CITATION.cff](CITATION.cff). For publication, competition, commercial use, or derivative research based on this project, contact the author or maintainer first to discuss collaboration and written permission. See [Publication and Competition Policy](PUBLICATION_AND_COMPETITION_POLICY.md) for details.
+
 The pipeline combines ensemble feature selection, a compact Transformer
 classifier, SVM baselines, external cohort validation, strict sensitivity
 validation, and statistical comparison.
@@ -355,4 +363,4 @@ Citation metadata is provided in [CITATION.cff](CITATION.cff).
 
 ## License
 
-This project is released under the [MIT License](LICENSE).
+This project is source-available under the [PolyForm Noncommercial License 1.0.0](LICENSE) and is governed by [NOTICE](NOTICE) and the [Publication and Competition Policy](PUBLICATION_AND_COMPETITION_POLICY.md). Publication, competition, award, commercial use, or direct reuse of research outputs requires prior written permission from the author or maintainer.
