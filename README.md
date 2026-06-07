@@ -1,58 +1,54 @@
-# Gene Expression Classification Pipeline
+﻿# 基因表达矩阵二分类流水线
 
-A reproducible Python pipeline for binary classification on gene-expression
-matrices. The case study in this repository focuses on Alzheimer's disease
-case/control cohorts, but the code is dataset-agnostic and can be used with any
-binary transcriptomic dataset that provides an expression matrix and sample
-labels.
+这是一个用于基因表达矩阵二分类的可复现实验流水线。当前案例研究面向阿尔茨海默病 AD 病例/对照队列，代码接口也适用于其他二分类转录组数据集。流水线覆盖特征选择、Transformer 训练、SVM 基线、外部验证和统计比较。
 
-[简体中文说明](README_CN.md)
+[English](README_EN.md)
 
-The pipeline combines ensemble feature selection, a compact Transformer
-classifier, SVM baselines, external cohort validation, strict sensitivity
-validation, and statistical comparison.
+## 核心功能
 
-## Highlights
+- 自动识别表达矩阵方向：基因为行或样本为行均可。
+- 支持常见二分类标签归一化，例如 `control`、`normal`、`positive`、`AD`。
+- 使用 Welch t-test、Mutual Information、XGBoost、Random Forest、ElasticNet、mRMR、Stability Selection 做集成特征选择。
+- 训练轻量级 `TransformerV3`，输出注意力图、gate 权重和基因交互矩阵。
+- 训练单 SVM、Voting SVM、Bagging SVM 作为强基线。
+- 支持外部队列验证，并可在配置文件中显式声明标签方向翻转。
+- 提供 nested internal validation、leave-one-cohort-out validation 和统计检验。
 
-- Matrix loader that accepts genes-as-rows or samples-as-rows input.
-- Binary label normalization for common `control` and `positive` synonyms.
-- Seven-method ensemble feature selection for candidate-gene panels.
-- Lightweight `TransformerV3` with attention maps, gate weights, and gene
-  interaction outputs.
-- Single SVM, Voting SVM, and Bagging SVM baselines.
-- External validation with explicit per-cohort label-polarity configuration.
-- Nested internal validation and leave-one-cohort-out validation utilities.
-- DeLong, McNemar, bootstrap confidence intervals, and publication-style plots.
+## 方法流程
 
-## Repository Layout
+- **数据准备**：GEO 表达矩阵通过平台注释映射到基因符号，重复基因按均值聚合；表达值在高动态范围时转换为 `log2(x + 1)`，随后按基因在单个数据集内做 z-score 标准化。
+- **训练集构建**：训练队列按公共基因交集合并，样本 ID 增加数据集前缀，并在标签表中保留 `dataset` 和 `source_sample_id` 元数据。
+- **矩阵读取**：训练和验证阶段根据 `sample_id` 自动判断矩阵方向，统一转换为“样本 x 基因”的建模矩阵；非数值表达值转换为缺失后填充为 `0.0`。
+- **标签处理**：常见 AD / control 标签归一化为二分类标签，`positive` 为 1，`control` 为 0。
+- **特征选择**：先通过 Welch t-test、FDR、效应量等统计量预筛选基因，再结合 Mutual Information、XGBoost gain、Random Forest importance、ElasticNet Logistic Regression、mRMR 和 Stability Selection 的排名，以验证 AUC 加权投票形成 30 个候选基因。
+- **Transformer 建模**：候选基因表达经过 rank-gauss 标准化后输入轻量级 `TransformerV3`。模型融合 CLS token、gene gate pooling、原始线性投影和二阶 interaction factor，并使用类别权重、label smoothing、辅助 focal loss、数据增强、多随机种子 OOF 集成训练。
+- **SVM 基线**：使用网格搜索选择 SVM 参数，并训练单 SVM、Voting SVM 和 Bagging SVM。
+- **验证与统计**：内部 OOF、nested internal validation、leave-one-cohort-out validation 和外部队列验证共同输出 AUC、Accuracy、混淆矩阵、ROC、DeLong 检验、McNemar 检验和 bootstrap 置信区间。
+
+## 目录结构
 
 ```text
 .
-|-- apps/                         # Pipeline orchestration and plotting helpers
-|-- data/                         # Case-study matrices and dataset manifest
-|-- docs/                         # Reproducibility notes and result snapshots
-|-- results/                      # Optional generated result snapshots
+|-- apps/                         # 主流程编排和可视化工具
+|-- data/                         # 案例数据矩阵和数据集清单
+|-- docs/                         # 复现说明、数据划分和结果快照
+|-- results/                      # 可选的运行结果快照
 |-- scripts/
-|   |-- analysis/                 # Statistical comparison
-|   |-- data/                     # GEO preparation helpers
-|   |-- evaluation/               # External, nested, and LOCO validation
-|   |-- preprocessing/            # Preprocessing and feature selection
-|   `-- training/                 # Transformer and SVM training
-|-- tests/                        # Lightweight regression tests
-|-- main.py                       # Compatibility CLI entry point
-|-- config.py                     # Paths, labels, artifacts, and environment config
-|-- requirements.txt              # Runtime dependencies
-`-- requirements-dev.txt          # Runtime dependencies plus test tools
+|   |-- analysis/                 # 统计分析
+|   |-- data/                     # GEO 数据准备工具
+|   |-- evaluation/               # 外部验证、嵌套验证、LOCO 验证
+|   |-- preprocessing/            # 数据预处理和特征选择
+|   `-- training/                 # Transformer 与 SVM 训练
+|-- tests/                        # 轻量回归测试
+|-- main.py                       # 兼容入口
+|-- config.py                     # 路径、标签和产物配置
+|-- requirements.txt              # 运行依赖
+`-- requirements-dev.txt          # 测试依赖
 ```
 
-See [docs/README.md](docs/README.md) for the documentation index.
+## 安装
 
-## Installation
-
-Use Python 3.10 or 3.11. A CUDA-capable PyTorch environment is useful for full
-Transformer training, but the tests and most data utilities also run on CPU.
-
-From the repository root:
+支持 Python 3.10 或 3.11。完整 Transformer 训练可使用 CUDA 版 PyTorch 环境；轻量测试和多数数据工具可在 CPU 上运行。
 
 ```bash
 python -m venv .venv
@@ -61,7 +57,7 @@ python -m pip install --upgrade pip
 python -m pip install -r requirements-dev.txt
 ```
 
-On Windows PowerShell:
+Windows PowerShell：
 
 ```powershell
 python -m venv .venv
@@ -70,32 +66,28 @@ python -m pip install --upgrade pip
 python -m pip install -r requirements-dev.txt
 ```
 
-If you use the LFS-tracked case-study matrices or model/result artifacts, install
-Git LFS before cloning or run:
+仓库中的大体积数据矩阵、模型权重或结果产物可通过 Git LFS 管理：
 
 ```bash
 git lfs install
 git lfs pull
 ```
 
-## Data Format
+## 数据格式
 
-Training data defaults to:
+默认训练数据路径：
 
 ```text
 data/train/cleaned_gene_matrix.csv
 data/train/sample_labels.csv
 ```
 
-The expression matrix may be either:
+表达矩阵可以是：
 
-- genes as rows and samples as columns; or
-- samples as rows and genes as columns.
+- 行为基因、列为样本；
+- 或行为样本、列为基因。
 
-The loader detects orientation by matching `sample_id` values from the label
-table. CSV, TSV, TXT, XLSX, and XLS files are supported.
-
-The label table must contain at least:
+标签表至少包含：
 
 ```csv
 sample_id,label
@@ -103,20 +95,33 @@ sample_001,control
 sample_002,positive
 ```
 
-Accepted positive labels include `1`, `true`, `positive`, `case`, `disease`,
-`AD`, and `Alzheimer`. Accepted negative labels include `0`, `false`,
-`negative`, `control`, `normal`, `healthy`, and `non-demented`.
-
-For other label names, set:
+标签名称可通过环境变量配置：
 
 ```powershell
 $env:GENE_EXPR_POSITIVE_LABEL="tumor"
 $env:GENE_EXPR_NEGATIVE_LABEL="normal"
 ```
 
-## External Validation Config
+## 案例数据集
 
-External cohorts are configured with `external_datasets.json`.
+当前 AD 案例使用 GEO 公开数据集构建训练集和外部验证集。
+
+| 数据集 | 角色 | 平台 | 样本数 | Control | Positive | 基因数 |
+|---|---|---:|---:|---:|---:|---:|
+| GSE1297 | 训练 | GPL96 | 31 | 9 | 22 | 13100 |
+| GSE33000 | 训练 | preprocessed | 467 | 157 | 310 | 17402 |
+| GSE36980 | 训练 | GPL6244 | 80 | 47 | 33 | 20003 |
+| GSE5281 | 训练 | GPL570 | 161 | 74 | 87 | 21753 |
+| GSE109887 | 外部验证 | preprocessed | 78 | 46 | 32 | 31682 |
+| GSE118553 | 外部验证 | GPL10558 | 267 | 100 | 167 | 20759 |
+| GSE122063 | 外部验证 | preprocessed | 100 | 44 | 56 | 32074 |
+| GSE48350 | 外部验证 | GPL570 | 220 | 140 | 80 | 21753 |
+
+训练集合并后包含 739 个样本，其中 control 287 个、positive 452 个，公共基因为 9981 个。`GSE29378` 保留为 exploratory 数据集，不在默认外部验证配置中使用。
+
+## 外部验证配置
+
+外部队列通过根目录的 `external_datasets.json` 配置：
 
 ```json
 {
@@ -126,60 +131,30 @@ External cohorts are configured with `external_datasets.json`.
   "cohort_b": {
     "path": "D:/datasets/cohort_b",
     "label_flip": true,
-    "label_flip_reason": "Use only after confirming reversed label polarity."
+    "label_flip_reason": "Confirmed reversed label polarity."
   }
 }
 ```
 
-The short path-only form is still supported:
+`label_flip: true` 表示该外部队列的标签方向与本项目的 `positive/control` 定义相反。主流程会在计算指标前翻转标签，并在结果 CSV 中写入 `ConfiguredLabelFlip` 和 `LabelPolarity`。
 
-```json
-{
-  "cohort_a": "data/external/cohort_a"
-}
-```
+当前案例中，`GSE109887` 已在 `external_datasets.json` 中显式配置为标签翻转，因为其 s1/s2 标签方向已确认与本项目约定相反。
 
-Each external directory should contain an expression matrix named one of:
+## 运行
 
-```text
-matrix.csv
-expression_matrix.csv
-gene_matrix.csv
-cleaned_gene_matrix.csv
-matrix.tsv
-geneMatrix.txt
-```
-
-and a label table named one of:
-
-```text
-labels.csv
-sample_labels.csv
-labels.tsv
-sample_labels.tsv
-```
-
-Legacy `s1.txt` and `s2.txt` group files are still supported for old GEO-style
-folders. Explicit `sample_labels.csv` labels are trusted by default. Use
-`label_flip: true` only after confirming that the cohort's label polarity is
-reversed for this pipeline's `positive` and `control` convention. The resulting
-CSV outputs record `ConfiguredLabelFlip` and `LabelPolarity`.
-
-## Usage
-
-Preprocess a dataset:
+预处理数据：
 
 ```bash
 python -m scripts.preprocessing.preprocess --matrix raw_matrix.csv --labels labels.csv
 ```
 
-Run the full pipeline:
+运行完整流水线：
 
 ```bash
 python main.py
 ```
 
-Run selected stages:
+分阶段运行：
 
 ```bash
 python -m scripts.preprocessing.feature_selection
@@ -189,35 +164,16 @@ python -m scripts.evaluation.external_validation
 python -m scripts.analysis.statistical_analysis
 ```
 
-Strict validation utilities:
+严格验证：
 
 ```bash
 python -m scripts.evaluation.nested_internal_validation
 python -m scripts.evaluation.loco_validation
 ```
 
-## Configuration
+## 结果与复现
 
-Common environment variables:
-
-| Variable | Purpose | Default |
-|---|---|---|
-| `GENE_EXPR_DATA_DIR` | Base data directory | `data/` |
-| `GENE_EXPR_TRAIN_DIR` | Training dataset directory | `data/train/` |
-| `GENE_EXPR_TRAIN_MATRIX` | Training matrix path | `data/train/cleaned_gene_matrix.csv` |
-| `GENE_EXPR_TRAIN_LABELS` | Training labels path | `data/train/sample_labels.csv` |
-| `GENE_EXPR_RESULTS_DIR` | Output directory | `results/` |
-| `GENE_EXPR_EXTERNALS_FILE` | External cohort JSON file | `external_datasets.json` |
-| `GENE_EXPR_EXTERNAL_DATASETS` | Inline `NAME=PATH` external cohort mapping | unset |
-| `GENE_EXPR_POSITIVE_LABEL` | Positive class name | `positive` |
-| `GENE_EXPR_NEGATIVE_LABEL` | Negative class name | `control` |
-
-If `torch` emits NumPy DLL warnings in your environment, use NumPy `<2.0`; this
-range is already pinned in `requirements.txt`.
-
-## Outputs
-
-Generated files are written under `results/`:
+主要输出写入 `results/`：
 
 ```text
 results/
@@ -230,66 +186,50 @@ results/
 `-- statistics/
 ```
 
-New generated outputs are ignored by default. This repository may keep selected
-result snapshots and LFS-tracked model artifacts for reproducibility. For a
-code-only public release, publish large matrices and checkpoints through Git LFS
-or GitHub Releases, and keep only documentation plus small result summaries in
-the main repository.
+当前 AD 案例的结果快照见 [docs/latest_results.md](docs/latest_results.md)。结果显示，轻量 Transformer 在小样本转录组 AD 分类中达到与强 SVM 基线相近的水平，并输出注意力图、gate 权重和基因交互矩阵等解释性结果。
 
-Important output files include:
+当前候选基因面板包含 30 个基因，见 [results/feature_selection/candidate_genes.txt](results/feature_selection/candidate_genes.txt)，包括 `ITPKB`、`NRN1`、`PPP1R7`、`NEUROD6`、`GFAP`、`SST`、`CD200`、`NRXN3`、`VGF`、`PTPRN2` 等。
 
-- `results/feature_selection/candidate_genes.txt`
-- `results/transformer/oof_predictions.csv`
-- `results/svm/oof_predictions.csv`
-- `results/external_validation/external_validation_summary.csv`
-- `results/statistics/transformer_vs_svm_statistics.csv`
-- `docs/latest_results.md`
+内部 OOF 验证结果：
 
-## Current Case-Study Results
+| 模型 | AUC | Accuracy |
+|---|---:|---:|
+| Transformer | 0.9322 | 0.8769 |
+| Logistic Regression | 0.9199 | 0.8444 |
+| SVM | 0.9256 | 0.8498 |
+| Voting SVM | 0.9316 | 0.8687 |
+| Bagging SVM | 0.9269 | 0.8566 |
 
-The current reproducible AD case-study snapshot is documented in
-[docs/latest_results.md](docs/latest_results.md). The headline result is that the
-compact Transformer is comparable to strong SVM baselines, with slightly higher
-single-SVM point estimates in internal OOF, nested internal validation, and some
-external cohorts. The external results are platform-dependent; do not claim that
-the Transformer is uniformly superior across all cohorts.
+严格泛化验证结果：
 
-`GSE109887` is configured with `label_flip: true` because its s1/s2 label
-polarity was confirmed to be reversed for this pipeline's convention.
+| 协议 | 模型 | Mean AUC | Mean Accuracy |
+|---|---|---:|---:|
+| Nested internal validation | Transformer | 0.9250 | 0.8468 |
+| Nested internal validation | SVM | 0.9188 | 0.8366 |
+| Leave-one-cohort-out validation | Transformer | 0.8000 | 0.7143 |
+| Leave-one-cohort-out validation | SVM | 0.7950 | 0.6756 |
 
-## Testing
+外部验证主结果采用 `train_prior_quantile` 阈值策略：
 
-Run the lightweight regression suite:
+| 数据集 | Transformer AUC | Transformer Accuracy | SVM AUC | SVM Accuracy |
+|---|---:|---:|---:|---:|
+| GSE109887 | 0.8770 | 0.7949 | 0.8601 | 0.7692 |
+| GSE118553 | 0.6914 | 0.6854 | 0.6778 | 0.6554 |
+| GSE122063 | 0.8482 | 0.6900 | 0.8369 | 0.7300 |
+| GSE48350 | 0.6691 | 0.5636 | 0.6824 | 0.5636 |
+
+## 测试
 
 ```bash
 python -m pytest -q
 ```
 
-The GitHub Actions workflow in [.github/workflows/tests.yml](.github/workflows/tests.yml)
-runs the same suite on Python 3.10 and 3.11.
+GitHub Actions 配置位于 [.github/workflows/tests.yml](.github/workflows/tests.yml)，会在 Python 3.10 和 3.11 上运行轻量测试。
 
-## Reproducibility Notes
+## 引用
 
-- Feature selection should be refit inside strict validation folds when
-  estimating generalization. The `nested_internal_validation` and
-  `loco_validation` scripts do this.
-- External validation thresholds are reported with the `train_prior_quantile`
-  strategy by default, with fixed internal and retrospective Youden summaries
-  saved as supplemental files.
-- Avoid tuning model settings on final external cohorts.
-- Verify GEO dataset licenses and privacy constraints before redistributing
-  processed matrices or trained checkpoints.
+引用信息见 [CITATION.cff](CITATION.cff)。
 
-## Contributing
+## 许可证
 
-See [CONTRIBUTING.md](CONTRIBUTING.md). Keep changes scoped, run the test suite,
-and document any new data or result-producing command.
-
-## Citation
-
-If this repository supports academic work, cite the repository and the original
-source datasets. A starter citation file is provided in [CITATION.cff](CITATION.cff).
-
-## License
-
-This project is released under the [MIT License](LICENSE).
+本项目使用 [MIT License](LICENSE)。
