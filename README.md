@@ -29,16 +29,17 @@
 
 ```text
 .
-|-- apps/                         # 主流程编排和可视化工具
-|-- data/                         # 案例数据矩阵和数据集清单
-|-- docs/                         # 复现说明、数据划分和结果快照
-|-- results/                      # 可选的运行结果快照
-|-- scripts/
+|-- apps/                         # 主流程编排、可视化和分阶段命令模块
+|   |-- pipeline.py               # 主流程编排
+|   |-- visualization.py          # 可视化工具
 |   |-- analysis/                 # 统计分析
 |   |-- data/                     # GEO 数据准备工具
 |   |-- evaluation/               # 外部验证、嵌套验证、LOCO 验证
 |   |-- preprocessing/            # 数据预处理和特征选择
 |   `-- training/                 # Transformer 与 SVM 训练
+|-- data/                         # 案例数据矩阵和数据集清单
+|-- docs/                         # 复现说明、数据划分和结果快照
+|-- results/                      # 可选的运行结果快照
 |-- tests/                        # 轻量回归测试
 |-- main.py                       # 兼容入口
 |-- config.py                     # 路径、标签和产物配置
@@ -145,7 +146,7 @@ $env:GENE_EXPR_NEGATIVE_LABEL="normal"
 预处理数据：
 
 ```bash
-python -m scripts.preprocessing.preprocess --matrix raw_matrix.csv --labels labels.csv
+python -m apps.preprocessing.preprocess --matrix raw_matrix.csv --labels labels.csv
 ```
 
 运行完整流水线：
@@ -157,18 +158,18 @@ python main.py
 分阶段运行：
 
 ```bash
-python -m scripts.preprocessing.feature_selection
-python -m scripts.training.train_transformer
-python -m scripts.training.train_svm
-python -m scripts.evaluation.external_validation
-python -m scripts.analysis.statistical_analysis
+python -m apps.preprocessing.feature_selection
+python -m apps.training.train_transformer
+python -m apps.training.train_svm
+python -m apps.evaluation.external_validation
+python -m apps.analysis.statistical_analysis
 ```
 
 严格验证：
 
 ```bash
-python -m scripts.evaluation.nested_internal_validation
-python -m scripts.evaluation.loco_validation
+python -m apps.evaluation.nested_internal_validation
+python -m apps.evaluation.loco_validation
 ```
 
 ## 结果与复现

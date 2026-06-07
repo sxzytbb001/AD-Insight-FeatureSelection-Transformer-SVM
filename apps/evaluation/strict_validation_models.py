@@ -42,7 +42,7 @@ def _best_threshold(y_true, y_prob):
 
 
 def _fit_transformer_ensemble(X_train, y_train, X_val, options):
-    from scripts.training.train_transformer import (
+    from apps.training.train_transformer import (
         build_transformer,
         cross_validate_transformer,
         train_single_model,
@@ -92,7 +92,7 @@ def _fit_transformer_ensemble(X_train, y_train, X_val, options):
 
 
 def _svm_oof_threshold(X_train_raw, y_train, best_params, n_splits):
-    from scripts.training.train_svm import build_svm_model
+    from apps.training.train_svm import build_svm_model
 
     n_splits = min(int(n_splits), int(np.bincount(y_train).min()))
     if n_splits < 2:
@@ -111,7 +111,7 @@ def _svm_oof_threshold(X_train_raw, y_train, best_params, n_splits):
 
 
 def _fit_svm_model(X_train, y_train, X_val, options):
-    from scripts.training.train_svm import build_svm_model, select_best_svm_via_grid
+    from apps.training.train_svm import build_svm_model, select_best_svm_via_grid
 
     preprocessor, X_train_processed = fit_rank_gauss_preprocessor(X_train)
     X_val_processed = transform_with_preprocessor(preprocessor, X_val)

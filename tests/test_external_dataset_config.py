@@ -48,7 +48,7 @@ class ExternalDatasetConfigTests(unittest.TestCase):
         self.assertFalse(parsed["cohort_plain"]["label_flip"])
 
     def test_external_validation_applies_configured_label_flip_before_metrics(self):
-        from scripts.evaluation.external_validation import _apply_external_label_options
+        from apps.evaluation.external_validation import _apply_external_label_options
 
         y_raw = np.array([0, 1, 1, 0])
         group_info = {"label_source": "sample_labels.csv", "control": 2, "positive": 2}

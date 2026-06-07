@@ -10,7 +10,7 @@ from sklearn.linear_model import LogisticRegressionCV
 from sklearn.preprocessing import StandardScaler
 
 from common import benjamini_hochberg, cohens_d
-from scripts.preprocessing.feature_selection import (
+from apps.preprocessing.feature_selection import (
     _evaluate_gene_set_auc,
     _mrmr_ranking,
     _rank_score,

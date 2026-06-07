@@ -299,7 +299,7 @@ def train_svm():
 
     candidate_genes = config.load_candidate_genes()
     if not candidate_genes:
-        print('错误：未找到 候选基因，请先运行 python -m scripts.preprocessing.feature_selection')
+        print('错误：未找到 候选基因，请先运行 python -m apps.preprocessing.feature_selection')
         return
 
     X, y, available_genes, _, labels_df = load_training_data(candidate_genes)

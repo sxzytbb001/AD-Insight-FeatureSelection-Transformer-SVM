@@ -1,7 +1,0 @@
-branch:
-  - reg: ^develop$
-    buttons:
-      - name: Run full pipeline
-        description: Run the AD diagnosis GPU pipeline
-        event: web_trigger_full_pipeline
-        isDefault: true

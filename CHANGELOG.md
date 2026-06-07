@@ -6,7 +6,7 @@
   transcriptomic case/control studies.
 - Added ensemble feature selection, Transformer training, SVM baselines,
   external validation, nested validation, LOCO validation, and statistical
-  comparison scripts.
+  comparison modules.
 - Added configured external label polarity handling for datasets such as
   `GSE109887`.
 - Added current AD case-study result snapshots in `docs/latest_results.md`.

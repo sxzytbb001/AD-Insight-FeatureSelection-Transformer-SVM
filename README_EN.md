@@ -62,16 +62,17 @@ validation, and statistical comparison.
 
 ```text
 .
-|-- apps/                         # Pipeline orchestration and plotting helpers
-|-- data/                         # Case-study matrices and dataset manifest
-|-- docs/                         # Reproducibility notes and result snapshots
-|-- results/                      # Optional generated result snapshots
-|-- scripts/
+|-- apps/                         # Pipeline orchestration, plotting, and command modules
+|   |-- pipeline.py               # Main pipeline orchestration
+|   |-- visualization.py          # Plotting helpers
 |   |-- analysis/                 # Statistical comparison
 |   |-- data/                     # GEO preparation helpers
 |   |-- evaluation/               # External, nested, and LOCO validation
 |   |-- preprocessing/            # Preprocessing and feature selection
 |   `-- training/                 # Transformer and SVM training
+|-- data/                         # Case-study matrices and dataset manifest
+|-- docs/                         # Reproducibility notes and result snapshots
+|-- results/                      # Optional generated result snapshots
 |-- tests/                        # Lightweight regression tests
 |-- main.py                       # Compatibility CLI entry point
 |-- config.py                     # Paths, labels, artifacts, and environment config
@@ -225,7 +226,7 @@ record `ConfiguredLabelFlip` and `LabelPolarity`.
 Preprocess a dataset:
 
 ```bash
-python -m scripts.preprocessing.preprocess --matrix raw_matrix.csv --labels labels.csv
+python -m apps.preprocessing.preprocess --matrix raw_matrix.csv --labels labels.csv
 ```
 
 Run the full pipeline:
@@ -237,18 +238,18 @@ python main.py
 Run selected stages:
 
 ```bash
-python -m scripts.preprocessing.feature_selection
-python -m scripts.training.train_transformer
-python -m scripts.training.train_svm
-python -m scripts.evaluation.external_validation
-python -m scripts.analysis.statistical_analysis
+python -m apps.preprocessing.feature_selection
+python -m apps.training.train_transformer
+python -m apps.training.train_svm
+python -m apps.evaluation.external_validation
+python -m apps.analysis.statistical_analysis
 ```
 
 Strict validation utilities:
 
 ```bash
-python -m scripts.evaluation.nested_internal_validation
-python -m scripts.evaluation.loco_validation
+python -m apps.evaluation.nested_internal_validation
+python -m apps.evaluation.loco_validation
 ```
 
 ## Configuration

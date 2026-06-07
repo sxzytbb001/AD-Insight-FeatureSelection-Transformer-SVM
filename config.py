@@ -133,7 +133,7 @@ SVM_ENSEMBLE_PATH = os.path.join(SVM_DIR, "ensemble_svm_model.pkl")
 SVM_SCALER_PATH = os.path.join(SVM_DIR, "scaler.pkl")
 SVM_PARAMS_PATH = os.path.join(SVM_DIR, "best_params.json")
 
-# Backward-compatible aliases used by older scripts.
+# Backward-compatible aliases used by older entry points.
 MODEL_PATH = TRANSFORMER_MODEL_PATH
 BEST_PARAMS_PATH = TRANSFORMER_PARAMS_PATH
 

@@ -116,7 +116,7 @@ def load_svm_models():
             ensemble_obj = pickle.load(f)
 
     if not models and ensemble_obj is None:
-        raise FileNotFoundError("未找到可用的 SVM 模型文件，请先运行 python -m scripts.training.train_svm")
+        raise FileNotFoundError("未找到可用的 SVM 模型文件，请先运行 python -m apps.training.train_svm")
     return models, ensemble_obj
 
 
@@ -233,7 +233,7 @@ def evaluate_external_models():
 
     candidate_genes = config.load_candidate_genes()
     if not candidate_genes:
-        print("错误：未找到候选基因，请先运行 python -m scripts.preprocessing.feature_selection")
+        print("错误：未找到候选基因，请先运行 python -m apps.preprocessing.feature_selection")
         return
 
     for path, name in [

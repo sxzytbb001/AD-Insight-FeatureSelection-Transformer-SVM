@@ -37,7 +37,7 @@ class GeneralizationProtocolTests(unittest.TestCase):
         self.assertTrue(all(abs(total - 1.0) < 1e-8 for total in group_totals.values()))
 
     def test_run_fold_protocol_refits_feature_selection_inside_each_outer_fold(self):
-        from scripts.evaluation.generalization_protocol import ValidationFold, run_fold_protocol
+        from apps.evaluation.generalization_protocol import ValidationFold, run_fold_protocol
 
         X = pd.DataFrame(
             {
@@ -86,7 +86,7 @@ class GeneralizationProtocolTests(unittest.TestCase):
         self.assertEqual(gene_frequency.set_index("gene").loc["GeneA", "selection_count"], 2)
 
     def test_loco_folds_fail_if_external_holdout_is_in_training_labels(self):
-        from scripts.evaluation.generalization_protocol import build_loco_folds
+        from apps.evaluation.generalization_protocol import build_loco_folds
 
         labels = pd.DataFrame(
             {
@@ -100,7 +100,7 @@ class GeneralizationProtocolTests(unittest.TestCase):
             build_loco_folds(labels, y, external_holdout_datasets={"GSE48350"})
 
     def test_loco_folds_leave_one_training_dataset_out(self):
-        from scripts.evaluation.generalization_protocol import build_loco_folds
+        from apps.evaluation.generalization_protocol import build_loco_folds
 
         labels = pd.DataFrame(
             {
@@ -120,7 +120,7 @@ class GeneralizationProtocolTests(unittest.TestCase):
             self.assertNotIn(fold.held_out_dataset, train_datasets)
 
     def test_loco_validation_uses_strict_external_holdout_defaults(self):
-        from scripts.evaluation.loco_validation import (
+        from apps.evaluation.loco_validation import (
             EXTERNAL_HOLDOUT_DATASETS,
             build_loco_validation_folds,
         )
@@ -142,7 +142,7 @@ class GeneralizationProtocolTests(unittest.TestCase):
         self.assertEqual([fold.name for fold in folds], ["loco_A", "loco_B"])
 
     def test_nested_validation_builds_seeded_outer_folds(self):
-        from scripts.evaluation.nested_internal_validation import (
+        from apps.evaluation.nested_internal_validation import (
             build_arg_parser,
             build_nested_validation_folds,
         )

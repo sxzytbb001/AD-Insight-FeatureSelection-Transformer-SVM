@@ -36,31 +36,31 @@ def _safe_print(message=""):
 
 
 def _run_feature_selection():
-    from scripts.preprocessing.feature_selection import feature_selection
+    from apps.preprocessing.feature_selection import feature_selection
 
     return feature_selection()
 
 
 def _run_transformer_training():
-    from scripts.training.train_transformer import train_transformer
+    from apps.training.train_transformer import train_transformer
 
     return train_transformer()
 
 
 def _run_svm_training():
-    from scripts.training.train_svm import train_svm
+    from apps.training.train_svm import train_svm
 
     return train_svm()
 
 
 def _run_external_validation():
-    from scripts.evaluation.external_validation import evaluate_external_models
+    from apps.evaluation.external_validation import evaluate_external_models
 
     return evaluate_external_models()
 
 
 def _run_statistical_analysis():
-    from scripts.analysis.statistical_analysis import run_statistical_analysis
+    from apps.analysis.statistical_analysis import run_statistical_analysis
 
     return run_statistical_analysis()
 
@@ -142,7 +142,7 @@ def run_full_pipeline(
     skip_statistics=False,
     continue_on_error=False,
 ):
-    """Backward-compatible pipeline entry point used by older scripts."""
+    """Backward-compatible pipeline entry point used by older callers."""
     return run_pipeline(
         PipelineOptions(
             skip_feature_selection=skip_feature_selection,

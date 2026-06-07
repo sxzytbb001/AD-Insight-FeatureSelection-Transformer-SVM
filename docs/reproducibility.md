@@ -48,28 +48,28 @@ validation, and statistical analysis in order.
 Run feature selection only:
 
 ```bash
-python -m scripts.preprocessing.feature_selection
+python -m apps.preprocessing.feature_selection
 ```
 
 Run model training:
 
 ```bash
-python -m scripts.training.train_transformer
-python -m scripts.training.train_svm
+python -m apps.training.train_transformer
+python -m apps.training.train_svm
 ```
 
 Run external validation and statistics without retraining:
 
 ```bash
-python -m scripts.evaluation.external_validation
-python -m scripts.analysis.statistical_analysis
+python -m apps.evaluation.external_validation
+python -m apps.analysis.statistical_analysis
 ```
 
 Run strict sensitivity checks:
 
 ```bash
-python -m scripts.evaluation.nested_internal_validation
-python -m scripts.evaluation.loco_validation
+python -m apps.evaluation.nested_internal_validation
+python -m apps.evaluation.loco_validation
 ```
 
 ## 5. External Label Polarity

@@ -8,7 +8,7 @@ import pandas as pd
 
 class PrepareGeoDatasetsTests(unittest.TestCase):
     def test_parse_series_matrix_reads_metadata_and_expression_table(self):
-        from scripts.data.prepare_geo_datasets import parse_series_matrix
+        from apps.data.prepare_geo_datasets import parse_series_matrix
 
         with tempfile.TemporaryDirectory() as tmp_dir:
             path = Path(tmp_dir) / "GSETEST_series_matrix.txt"
@@ -39,7 +39,7 @@ class PrepareGeoDatasetsTests(unittest.TestCase):
         self.assertEqual(parsed.metadata["disease state"].tolist(), ["normal", "Alzheimer's Disease"])
 
     def test_aggregate_probe_matrix_by_symbol_averages_duplicate_gene_symbols(self):
-        from scripts.data.prepare_geo_datasets import aggregate_probe_matrix_by_symbol
+        from apps.data.prepare_geo_datasets import aggregate_probe_matrix_by_symbol
 
         expression = pd.DataFrame(
             {"GSM1": [1.0, 3.0, 10.0], "GSM2": [5.0, 7.0, 20.0]},
@@ -54,7 +54,7 @@ class PrepareGeoDatasetsTests(unittest.TestCase):
         self.assertEqual(aggregated.loc["GENE1", "GSM2"], 6.0)
 
     def test_build_sample_labels_excludes_non_binary_groups(self):
-        from scripts.data.prepare_geo_datasets import build_sample_labels
+        from apps.data.prepare_geo_datasets import build_sample_labels
 
         metadata = pd.DataFrame(
             {
@@ -70,7 +70,7 @@ class PrepareGeoDatasetsTests(unittest.TestCase):
         self.assertEqual(labels["label"].tolist(), ["control", "positive", "control"])
 
     def test_load_probe_to_symbol_reads_geo_annotation_table(self):
-        from scripts.data.prepare_geo_datasets import load_probe_to_symbol
+        from apps.data.prepare_geo_datasets import load_probe_to_symbol
 
         with tempfile.TemporaryDirectory() as tmp_dir:
             annotation_dir = Path(tmp_dir)
