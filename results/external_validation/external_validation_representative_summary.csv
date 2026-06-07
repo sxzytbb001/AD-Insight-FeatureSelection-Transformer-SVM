@@ -1,0 +1,9 @@
+Dataset,Model,AUC,Accuracy,Threshold,ThresholdStrategy,InferenceStrategy,PresentGenes,MissingGenes,CoverageRatio,LabelCorr,LabelFlipped,ConfiguredLabelFlip,LabelFlipReason,LabelPolarity
+GSE109887,Transformer,0.877038043478261,0.7948717948717948,0.272376372427232,train_prior_quantile,adaptive_main_top28_blend,27,3,0.9,0.8844791842113298,False,True,Confirmed reversed s1/s2 label polarity.,flipped_by_config
+GSE109887,Bagging_SVM,0.8709239130434783,0.7692307692307693,0.47139767487244466,train_prior_quantile,fixed_model,27,3,0.9,0.8844791842113298,False,True,Confirmed reversed s1/s2 label polarity.,flipped_by_config
+GSE118553,Transformer,0.691437125748503,0.6853932584269663,0.3874018327364538,train_prior_quantile,adaptive_main_top28_blend,30,0,1.0,0.8198861335407194,False,False,,as_provided
+GSE118553,Bagging_SVM,0.7120359281437125,0.6928838951310862,0.5161322448570261,train_prior_quantile,fixed_model,30,0,1.0,0.8198861335407194,False,False,,as_provided
+GSE122063,Transformer,0.8482142857142857,0.69,0.15762934746858392,train_prior_quantile,adaptive_main_top28_blend,30,0,1.0,0.9473092500806962,False,False,,as_provided
+GSE122063,Bagging_SVM,0.8689123376623377,0.75,0.35476607581922215,train_prior_quantile,fixed_model,30,0,1.0,0.9473092500806962,False,False,,as_provided
+GSE48350,Transformer,0.669107142857143,0.5636363636363636,0.5975198817454079,train_prior_quantile,adaptive_main_top28_blend,30,0,1.0,0.9406339388267796,False,False,,as_provided
+GSE48350,Bagging_SVM,0.6739285714285714,0.5636363636363636,0.5989714676013463,train_prior_quantile,fixed_model,30,0,1.0,0.9406339388267796,False,False,,as_provided

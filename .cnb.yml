@@ -1,0 +1,41 @@
+develop:
+  push:
+    - name: gpu-full-pipeline
+      runner:
+        tags: cnb:arch:amd64:gpu
+        cpus: 16
+      docker:
+        image: pytorch/pytorch:2.2.2-cuda12.1-cudnn8-runtime
+        volumes:
+          - /root/.cache/pip:copy-on-write
+      stages:
+        - name: run-ad-pipeline
+          timeout: 24h
+          script:
+            - bash scripts/run_cloud_pipeline.sh
+
+  web_trigger_full_pipeline:
+    - name: gpu-full-pipeline-manual
+      runner:
+        tags: cnb:arch:amd64:gpu
+        cpus: 16
+      docker:
+        image: pytorch/pytorch:2.2.2-cuda12.1-cudnn8-runtime
+        volumes:
+          - /root/.cache/pip:copy-on-write
+      stages:
+        - name: run-ad-pipeline
+          timeout: 24h
+          script:
+            - bash scripts/run_cloud_pipeline.sh
+
+$:
+  vscode:
+    - docker:
+        image: pytorch/pytorch:2.2.2-cuda12.1-cudnn8-runtime
+        runner:
+          tags: cnb:arch:amd64:gpu
+          cpus: 8
+      services:
+        - vscode
+        - docker

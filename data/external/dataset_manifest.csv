@@ -1,0 +1,10 @@
+dataset,role,platform,samples,control,positive,genes
+GSE29378,exploratory,GPL6947,63,32,31,19609
+GSE109887,external,preprocessed,78,46,32,31682
+GSE118553,external,GPL10558,267,100,167,20759
+GSE122063,external,preprocessed,100,44,56,32074
+GSE48350,external,GPL570,220,140,80,21753
+GSE1297,train,GPL96,31,9,22,13100
+GSE33000,train,preprocessed,467,157,310,17402
+GSE36980,train,GPL6244,80,47,33,20003
+GSE5281,train,GPL570,161,74,87,21753

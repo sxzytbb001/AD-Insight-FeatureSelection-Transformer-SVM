@@ -1,0 +1,190 @@
+{
+  "best_grid_params": {
+    "kernel": "rbf",
+    "C": 10.0,
+    "gamma": 0.005
+  },
+  "best_grid_auc": 0.9306603895533115,
+  "selection_meta": {
+    "cv_splits": 5,
+    "cv_repeats": 3,
+    "best_mean_auc": 0.9340383230401378,
+    "best_std_auc": 0.010935036124951236,
+    "stable_floor_auc": 0.9231032869151865,
+    "stable_candidate_count": 65,
+    "selected_mean_auc": 0.9306603895533115,
+    "selected_std_auc": 0.006988276130663232,
+    "selected_rank": 24
+  },
+  "search_space": [
+    {
+      "kernel": [
+        "rbf"
+      ],
+      "C": [
+        0.25,
+        0.5,
+        1,
+        2,
+        5,
+        10,
+        20
+      ],
+      "gamma": [
+        "scale",
+        0.0005,
+        0.001,
+        0.002,
+        0.005,
+        0.01
+      ]
+    },
+    {
+      "kernel": [
+        "poly"
+      ],
+      "C": [
+        0.5,
+        1,
+        2,
+        5,
+        10
+      ],
+      "gamma": [
+        "scale",
+        0.0005,
+        0.001,
+        0.002,
+        0.005
+      ],
+      "degree": [
+        2,
+        3
+      ]
+    }
+  ],
+  "thresholds": {
+    "SVM": 0.6621177654775866,
+    "Voting_SVM": 0.5984089896915263,
+    "Bagging_SVM": 0.6202170398925506
+  },
+  "oof_metrics": {
+    "SVM": {
+      "auc": 0.9255881718109217,
+      "acc": 0.8497970230040596
+    },
+    "Voting_SVM": {
+      "auc": 0.9315778113533348,
+      "acc": 0.8687415426251691
+    },
+    "Bagging_SVM": {
+      "auc": 0.9268523943140822,
+      "acc": 0.8565629228687416
+    }
+  },
+  "fold_best_params": [
+    {
+      "fold": 1,
+      "best_params": {
+        "kernel": "rbf",
+        "C": 0.25,
+        "gamma": 0.005
+      },
+      "inner_auc": 0.9295170027928649,
+      "selection_meta": {
+        "cv_splits": 4,
+        "cv_repeats": 2,
+        "best_mean_auc": 0.9325545387931957,
+        "best_std_auc": 0.01753167285054892,
+        "stable_floor_auc": 0.9150228659426468,
+        "stable_candidate_count": 65,
+        "selected_mean_auc": 0.9295170027928649,
+        "selected_std_auc": 0.016294749457221445,
+        "selected_rank": 17
+      }
+    },
+    {
+      "fold": 2,
+      "best_params": {
+        "kernel": "rbf",
+        "C": 20.0,
+        "gamma": 0.002
+      },
+      "inner_auc": 0.9309395421577817,
+      "selection_meta": {
+        "cv_splits": 4,
+        "cv_repeats": 2,
+        "best_mean_auc": 0.933643043284604,
+        "best_std_auc": 0.01707637453452284,
+        "stable_floor_auc": 0.9165666687500812,
+        "stable_candidate_count": 66,
+        "selected_mean_auc": 0.9309395421577817,
+        "selected_std_auc": 0.014083741975450445,
+        "selected_rank": 9
+      }
+    },
+    {
+      "fold": 3,
+      "best_params": {
+        "kernel": "poly",
+        "C": 5.0,
+        "gamma": "scale",
+        "degree": 3
+      },
+      "inner_auc": 0.9231283198048171,
+      "selection_meta": {
+        "cv_splits": 4,
+        "cv_repeats": 2,
+        "best_mean_auc": 0.9337766618506183,
+        "best_std_auc": 0.021587765367900334,
+        "stable_floor_auc": 0.912188896482718,
+        "stable_candidate_count": 66,
+        "selected_mean_auc": 0.9231283198048171,
+        "selected_std_auc": 0.01392527210998355,
+        "selected_rank": 64
+      }
+    },
+    {
+      "fold": 4,
+      "best_params": {
+        "kernel": "rbf",
+        "C": 5.0,
+        "gamma": 0.005
+      },
+      "inner_auc": 0.9263560555529702,
+      "selection_meta": {
+        "cv_splits": 4,
+        "cv_repeats": 2,
+        "best_mean_auc": 0.9276713418160787,
+        "best_std_auc": 0.008419026361220754,
+        "stable_floor_auc": 0.919252315454858,
+        "stable_candidate_count": 62,
+        "selected_mean_auc": 0.9263560555529702,
+        "selected_std_auc": 0.0073723077324508845,
+        "selected_rank": 10
+      }
+    },
+    {
+      "fold": 5,
+      "best_params": {
+        "kernel": "rbf",
+        "C": 0.25,
+        "gamma": "scale"
+      },
+      "inner_auc": 0.9282257229058499,
+      "selection_meta": {
+        "cv_splits": 4,
+        "cv_repeats": 2,
+        "best_mean_auc": 0.934086916561962,
+        "best_std_auc": 0.016803510056219936,
+        "stable_floor_auc": 0.917283406505742,
+        "stable_candidate_count": 65,
+        "selected_mean_auc": 0.9282257229058499,
+        "selected_std_auc": 0.013092768266162933,
+        "selected_rank": 38
+      }
+    }
+  ],
+  "preprocessing": "rank_gauss_standard",
+  "candidate_gene_count": 30
+}

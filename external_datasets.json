@@ -1,0 +1,16 @@
+{
+  "GSE109887": {
+    "path": "data/external/GSE109887",
+    "label_flip": true,
+    "label_flip_reason": "Confirmed reversed s1/s2 label polarity."
+  },
+  "GSE118553": {
+    "path": "data/external/GSE118553"
+  },
+  "GSE122063": {
+    "path": "data/external/GSE122063"
+  },
+  "GSE48350": {
+    "path": "data/external/GSE48350"
+  }
+}

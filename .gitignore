@@ -1,0 +1,73 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+build/
+dist/
+*.egg-info/
+
+# Environments
+.env
+.venv/
+venv/
+env/
+
+# Local IDE/editor files
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+*.log
+
+# Data and generated outputs
+data/*
+!data/README.md
+!data/train/
+!data/train/cleaned_gene_matrix.csv
+!data/train/sample_labels.csv
+!data/external/
+data/external/*
+!data/external/dataset_manifest.csv
+!data/external/GSE109887/
+!data/external/GSE109887/geneMatrix.txt
+!data/external/GSE109887/sample_labels.csv
+!data/external/GSE118553/
+!data/external/GSE118553/geneMatrix.txt
+!data/external/GSE118553/sample_labels.csv
+!data/external/GSE122063/
+!data/external/GSE122063/geneMatrix.txt
+!data/external/GSE122063/sample_labels.csv
+!data/external/GSE48350/
+!data/external/GSE48350/geneMatrix.txt
+!data/external/GSE48350/sample_labels.csv
+/GSE*/
+results/*
+!results/README.md
+outputs/
+logs/
+tmp/
+archive/
+aigc_report_extracted/
+最终论文/
+
+# Model artifacts
+*.pth
+*.pt
+*.pkl
+*.joblib
+
+# Thesis/local working artifacts
+*.docx
+~$*
+v19_extract.txt
+generate_translation_final.py
+analyze_chapter4_comments.py
+review_chapter4_comments.py
+
+# Platform-specific deployment leftovers

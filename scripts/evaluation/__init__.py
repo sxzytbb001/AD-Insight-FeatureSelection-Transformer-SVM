@@ -1,0 +1,1 @@
+"""External validation entry points."""

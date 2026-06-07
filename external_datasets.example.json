@@ -1,0 +1,10 @@
+{
+  "cohort_a": {
+    "path": "data/external/cohort_a"
+  },
+  "cohort_b": {
+    "path": "data/external/cohort_b",
+    "label_flip": true,
+    "label_flip_reason": "Use only after confirming reversed label polarity."
+  }
+}

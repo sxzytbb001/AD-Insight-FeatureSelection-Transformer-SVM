@@ -1,0 +1,10 @@
+/scripts/*.sh text eol=lf
+/.cnb.yml text eol=lf
+/.cnb/*.yml text eol=lf
+/data/train/cleaned_gene_matrix.csv filter=lfs diff=lfs merge=lfs -text
+/data/external/GSE109887/geneMatrix.txt filter=lfs diff=lfs merge=lfs -text
+/data/external/GSE118553/geneMatrix.txt filter=lfs diff=lfs merge=lfs -text
+/data/external/GSE122063/geneMatrix.txt filter=lfs diff=lfs merge=lfs -text
+/data/external/GSE48350/geneMatrix.txt filter=lfs diff=lfs merge=lfs -text
+/results/**/*.pth filter=lfs diff=lfs merge=lfs -text
+/results/**/*.pkl filter=lfs diff=lfs merge=lfs -text
