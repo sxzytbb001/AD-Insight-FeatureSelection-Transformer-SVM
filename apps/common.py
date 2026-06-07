@@ -20,7 +20,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-import config
+from apps import config
 
 config.ensure_dirs()
 warnings.filterwarnings('ignore')

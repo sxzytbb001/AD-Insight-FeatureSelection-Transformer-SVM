@@ -5,7 +5,7 @@ import traceback
 from dataclasses import dataclass
 from typing import Callable, List
 
-import config
+from apps import config
 
 
 @dataclass(frozen=True)

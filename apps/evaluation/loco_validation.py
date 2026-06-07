@@ -1,8 +1,8 @@
 import argparse
 import os
 
-import config
-from common import load_training_matrix_and_labels
+from apps import config
+from apps.common import load_training_matrix_and_labels
 from apps.evaluation.generalization_protocol import build_loco_folds, run_fold_protocol
 from apps.evaluation.strict_validation_models import FoldModelOptions, evaluate_fold_models
 from apps.preprocessing.feature_selection_core import run_ensemble_feature_selection

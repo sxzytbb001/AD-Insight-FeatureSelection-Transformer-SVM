@@ -11,7 +11,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-import common
+from apps import common
 
 
 ANNOTATION_URLS = {

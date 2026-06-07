@@ -3,8 +3,8 @@ import os
 
 import pandas as pd
 
-import config
-from common import load_training_matrix_and_labels
+from apps import config
+from apps.common import load_training_matrix_and_labels
 from apps.evaluation.generalization_protocol import (
     build_stratified_outer_folds,
     run_fold_protocol,

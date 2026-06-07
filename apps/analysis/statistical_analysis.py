@@ -7,7 +7,7 @@ import pandas as pd
 from scipy.stats import binomtest, chi2, norm
 from sklearn.metrics import accuracy_score, roc_auc_score, roc_curve
 
-import config
+from apps import config
 
 config.ensure_dirs()
 

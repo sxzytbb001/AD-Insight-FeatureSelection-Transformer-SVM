@@ -10,9 +10,9 @@ import pandas as pd
 import torch
 from sklearn.metrics import accuracy_score, auc, confusion_matrix, roc_curve
 
-import config
+from apps import config
 from apps.visualization import plot_confusion_matrix, plot_grouped_metric_barplot
-from common import (
+from apps.common import (
     TransformerV3,
     align_data_distribution,
     align_dataset_labels,

@@ -9,7 +9,7 @@ import numpy as np
 
 class ExternalDatasetConfigTests(unittest.TestCase):
     def test_external_dataset_parser_accepts_path_objects_with_label_flip(self):
-        import config
+        from apps import config
 
         with tempfile.TemporaryDirectory() as tmp_dir:
             root = Path(tmp_dir)

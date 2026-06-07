@@ -7,7 +7,7 @@ import pandas as pd
 
 class GeneralizationProtocolTests(unittest.TestCase):
     def test_label_reader_preserves_dataset_metadata_for_cohort_validation(self):
-        import common
+        from apps import common
 
         labels = pd.DataFrame(
             {
@@ -23,7 +23,7 @@ class GeneralizationProtocolTests(unittest.TestCase):
         self.assertEqual(parsed.columns.tolist(), ["sample_id", "label", "dataset"])
 
     def test_cohort_class_weights_balance_each_dataset_label_group(self):
-        from common import compute_cohort_class_sample_weights
+        from apps.common import compute_cohort_class_sample_weights
 
         y = np.array([0, 0, 0, 1, 1, 0])
         cohorts = np.array(["A", "A", "A", "A", "B", "B"])

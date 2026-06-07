@@ -63,7 +63,11 @@ validation, and statistical comparison.
 ```text
 .
 |-- apps/                         # Pipeline orchestration, plotting, and command modules
+|   |-- main.py                   # Pipeline command entry point
 |   |-- pipeline.py               # Main pipeline orchestration
+|   |-- config.py                 # Paths, labels, artifacts, and environment config
+|   |-- common.py                 # Data loading, label handling, and modeling helpers
+|   |-- plot_style.py             # Plot theme and shared chart styling
 |   |-- visualization.py          # Plotting helpers
 |   |-- analysis/                 # Statistical comparison
 |   |-- data/                     # GEO preparation helpers
@@ -74,8 +78,6 @@ validation, and statistical comparison.
 |-- docs/                         # Reproducibility notes and result snapshots
 |-- results/                      # Optional generated result snapshots
 |-- tests/                        # Lightweight regression tests
-|-- main.py                       # Compatibility CLI entry point
-|-- config.py                     # Paths, labels, artifacts, and environment config
 |-- requirements.txt              # Runtime dependencies
 `-- requirements-dev.txt          # Runtime dependencies plus test tools
 ```
@@ -232,7 +234,7 @@ python -m apps.preprocessing.preprocess --matrix raw_matrix.csv --labels labels.
 Run the full pipeline:
 
 ```bash
-python main.py
+python -m apps.main
 ```
 
 Run selected stages:

@@ -37,7 +37,7 @@ python -m pytest -q
 ## 3. Run The Full Pipeline
 
 ```bash
-python main.py
+python -m apps.main
 ```
 
 This runs feature selection, Transformer training, SVM training, external

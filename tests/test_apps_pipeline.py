@@ -32,7 +32,7 @@ class PipelineAppTests(unittest.TestCase):
 
     def test_main_uses_app_pipeline_entrypoint(self):
         import apps.pipeline
-        import main
+        from apps import main
 
         self.assertIs(main.run_full_pipeline, apps.pipeline.run_full_pipeline)
 

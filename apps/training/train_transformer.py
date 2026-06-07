@@ -16,8 +16,8 @@ from torch.optim import AdamW
 from torch.optim.lr_scheduler import CosineAnnealingWarmRestarts
 from torch.utils.data import DataLoader, TensorDataset
 
-import config
-from common import (
+from apps import config
+from apps.common import (
     EarlyStopping,
     FocalLoss,
     TransformerV3,
@@ -36,7 +36,7 @@ from apps.visualization import (
     plot_gene_interaction_network,
     plot_interaction_heatmap,
 )
-from plot_style import ranked_barplot
+from apps.plot_style import ranked_barplot
 
 config.ensure_dirs()
 

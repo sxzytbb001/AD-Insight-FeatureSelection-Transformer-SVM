@@ -3,8 +3,8 @@ import os
 
 import pandas as pd
 
-import config
-from common import (
+from apps import config
+from apps.common import (
     _read_label_table,
     normalize_binary_label,
     orient_expression_matrix,

@@ -13,10 +13,10 @@ from sklearn.metrics import roc_auc_score
 from sklearn.model_selection import StratifiedKFold
 from sklearn.preprocessing import StandardScaler
 
-import config
+from apps import config
 from apps.visualization import plot_expression_heatmap, plot_metric_barplot
-from common import benjamini_hochberg, cohens_d, load_training_matrix_and_labels
-from plot_style import ranked_barplot
+from apps.common import benjamini_hochberg, cohens_d, load_training_matrix_and_labels
+from apps.plot_style import ranked_barplot
 
 config.ensure_dirs()
 warnings.filterwarnings('ignore')

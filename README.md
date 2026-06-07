@@ -30,7 +30,11 @@
 ```text
 .
 |-- apps/                         # 主流程编排、可视化和分阶段命令模块
+|   |-- main.py                   # 流水线命令入口
 |   |-- pipeline.py               # 主流程编排
+|   |-- config.py                 # 路径、标签和产物配置
+|   |-- common.py                 # 数据读取、标签处理和通用建模工具
+|   |-- plot_style.py             # 绘图主题和通用图表样式
 |   |-- visualization.py          # 可视化工具
 |   |-- analysis/                 # 统计分析
 |   |-- data/                     # GEO 数据准备工具
@@ -41,8 +45,6 @@
 |-- docs/                         # 复现说明、数据划分和结果快照
 |-- results/                      # 可选的运行结果快照
 |-- tests/                        # 轻量回归测试
-|-- main.py                       # 兼容入口
-|-- config.py                     # 路径、标签和产物配置
 |-- requirements.txt              # 运行依赖
 `-- requirements-dev.txt          # 测试依赖
 ```
@@ -152,7 +154,7 @@ python -m apps.preprocessing.preprocess --matrix raw_matrix.csv --labels labels.
 运行完整流水线：
 
 ```bash
-python main.py
+python -m apps.main
 ```
 
 分阶段运行：

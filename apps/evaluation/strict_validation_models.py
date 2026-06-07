@@ -7,8 +7,8 @@ import torch
 from sklearn.metrics import roc_curve
 from sklearn.model_selection import StratifiedKFold, train_test_split
 
-import config
-from common import fit_rank_gauss_preprocessor, tensor_to_numpy, transform_with_preprocessor
+from apps import config
+from apps.common import fit_rank_gauss_preprocessor, tensor_to_numpy, transform_with_preprocessor
 
 
 DEFAULT_TRANSFORMER_PARAMS = {

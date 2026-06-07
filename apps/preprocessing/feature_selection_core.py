@@ -9,7 +9,7 @@ from sklearn.feature_selection import mutual_info_classif
 from sklearn.linear_model import LogisticRegressionCV
 from sklearn.preprocessing import StandardScaler
 
-from common import benjamini_hochberg, cohens_d
+from apps.common import benjamini_hochberg, cohens_d
 from apps.preprocessing.feature_selection import (
     _evaluate_gene_set_auc,
     _mrmr_ranking,

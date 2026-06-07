@@ -16,7 +16,7 @@ data/
     `-- GSE48350/
 ```
 
-The default paths are defined in `config.py` and can be overridden with
+The default paths are defined in `apps/config.py` and can be overridden with
 environment variables such as `GENE_EXPR_TRAIN_MATRIX`,
 `GENE_EXPR_TRAIN_LABELS`, and `GENE_EXPR_EXTERNALS_FILE`.
 

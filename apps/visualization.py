@@ -17,7 +17,7 @@ import numpy as np
 import pandas as pd
 import seaborn as sns
 
-from plot_style import apply_paper_theme, style_axis
+from apps.plot_style import apply_paper_theme, style_axis
 
 
 def _ensure_parent(save_path):
@@ -206,7 +206,7 @@ def plot_ranked_importance(
     top_n=15,
     dpi=300,
 ):
-    from plot_style import ranked_barplot
+    from apps.plot_style import ranked_barplot
 
     plot_df = data.sort_values(score_col, ascending=False).head(top_n)
     ranked_barplot(

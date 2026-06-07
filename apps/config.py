@@ -3,7 +3,7 @@ import os
 
 import torch
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 def _resolve_path(path_value):

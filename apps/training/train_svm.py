@@ -12,9 +12,9 @@ from sklearn.metrics import accuracy_score, auc, confusion_matrix, roc_auc_score
 from sklearn.model_selection import GridSearchCV, RepeatedStratifiedKFold, StratifiedKFold
 from sklearn.svm import SVC
 
-import config
+from apps import config
 from apps.visualization import plot_confusion_matrix, plot_ranked_importance
-from common import fit_rank_gauss_preprocessor, load_training_data, save_json, transform_with_preprocessor
+from apps.common import fit_rank_gauss_preprocessor, load_training_data, save_json, transform_with_preprocessor
 
 config.ensure_dirs()
 
